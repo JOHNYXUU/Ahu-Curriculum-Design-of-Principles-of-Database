@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang = "zh-CN">
+<head>
+    <meta charset = "UTF-8"/>
+    <meta name = "viewport"
+          content = "width=device-width, initial-scale=1.0"/>
+    <link rel = "stylesheet"
+          href = "../../static/manager.css"/>
+    <link
+            rel = "stylesheet"
+            href = "https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+            integrity = "sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+            crossorigin = "anonymous"
+    />
+    <!-- font text -->
+    <link
+            href = "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"
+            rel = "stylesheet"
+    />
+    <title>WareMouse</title>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__inner">
+            <ul class="navbar">
+                <li class="navbar__item"><a href="/mainpage/eleapp">电器</a></li>
+                <li class="navbar__item"><a href="/mainpage/digital">数码</a></li>
+                <li class="navbar__item"><a href="/mainpage/book">图书</a></li>
+                <li class="navbar__item"><a href="/mainpage/food">食品</a></li>
+                <li class="navbar__item"><a href="/mainpage/warehouse">仓库租赁</a></li>
+                <li class="navbar__item"><a href="/mainpage/changeorder">修改订单</a></li>
+                <li class="navbar__item"><a href="#">联系我们</a></li>
+            </ul>
+            <div class="header__icon">
+                <a href="/mainpage/profile"><i class="far fa-user"></i></a>
+                <a href="/login"><i class="far fa-sign-out"></i> </a>
+            </div>
+        </div>
+    </header>
+    <section class = "middle">
+        <form method="post">
+            {% csrf_token %}
+            <table class="change_order">
+               <tr class="choose_order">
+                   <th class="left" >
+                        选择订单
+                   </th>
+                   <th class="right">
+                       <select name="selected">
+                           {% for order in orders %}
+                                <option>---{{ order }}---</option>
+                           {% endfor %}
+                       </select>
+                   </th>
+               </tr>
+                <tr class="operate">
+                    <th class="left">
+                        选择操作
+                    </th>
+                    <th class="right">
+                        <input type="radio" onclick="document.getElementById('hide').style.display='inline';document.getElementById('hide2').style.display='inline'" name="operate" value="change" id="change"><label for="change">修改订单</label>
+                        <input type="radio" onclick="document.getElementById('hide').style.display='none';document.getElementById('hide2').style.display='none'" name="operate" value="cancel" id="cancel"><label for="cancel">取消订单</label>
+                    </th>
+                </tr>
+                <tr class="ware_num" id="hide">
+                    <th class="left">
+                        修改数量
+                    </th>
+                    <th class="right" >
+                        <input type="number" name="number">
+                    </th>
+                </tr>
+                <tr class="address" id="hide2">
+                    <th class="left">
+                        修改地址
+                    </th>
+                    <th class="right">
+                        <input type="text" name="address">
+                    </th>
+                </tr>
+                <tr>
+                    <th class="btn">
+                        <input type = "submit" value="确认">
+                    </th>
+                </tr>
+            </table>
+        </form>
+    </section>
+    <footer class="footer">
+        <div class="footer__overlay">
+            <div class="container footer__inner">
+                <ul class="footer__list">
+                    <li class="footer__item">
+              <span class="footer__logo">
+                <img
+                        src="https://weblizar.com/demo/html/Ecoast/images/logo-wht.png"
+                        alt="logo"
+                />
+              </span>
+                        <p class="footer__para">
+                            Created by <br><br>安徽大学计算机科学与技术学院 <br><br>软件工程学生:<br><br>王浩宇 <br><br>徐雪健<br> <br>李义刚 <br><br>朱龙生
+                        </p>
+                    </li>
+                    <li class="footer__item">
+                        <h2 class="footer__title">Populer Tags</h2>
+                        <ul class="link-list">
+                            <li class="link-list__item"><a href="#">数码</a></li>
+                            <li class="link-list__item"><a href="#">家电</a></li>
+                            <li class="link-list__item"><a href="#">图书</a></li>
+                            <li class="link-list__item"><a href="#">食品</a></li>
+                        </ul>
+                    </li>
+                    <li class="footer__item">
+                        <h2 class="footer__title">Contact-Us</h2>
+                        <ul class="contact-list">
+                            <li class="contact-list__item">
+                                安徽大学磬苑校区行知楼B205 ACM-ICPC实验室
+                            </li>
+                            <li class="contact-list__item">(+86) 15755111689</li>
+                            <li class="contact-list__item">howiewang.cs@ahu.com</li>
+                        </ul>
+                    </li>
+                    <li class="footer__item">
+                        <h2 class="footer__title">Rss</h2>
+                        <div class="contact-box">
+                            <p class="contact-box__title">订阅最新消息</p>
+                            <input
+                                    class="contact-box__input"
+                                    type="text"
+                                    placeholder="Email"
+                            />
+                            <button class="contact-box__btn">确定订阅</button>
+                        </div>
+                    </li>
+                </ul>
+                <p class="footer__last-text">
+                    2020 . All Rights Reserved Developed By 安徽大学软件工程.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <a class = "move-top__btn" href = "#"><i class = "fas fa-arrow-up"></i></a>
+
+    <div class="window" id="window">
+        <div class="text">
+            抱歉，不支持此功能
+        </div>
+        <a href="javascript:void(0)" onclick="hideWindow()">
+            <img src="../../static/images/关闭.png" height="25px" width="25px">
+        </a>
+    </div>
+    <div id="shadow" class="shadow"></div>
+<div class="fixed">
+        <a href="/mainpage" target="_self" class="after"><div class="icon"></div></a>
+    </div>
+</body>
+</html>

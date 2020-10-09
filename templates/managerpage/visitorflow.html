@@ -1,0 +1,121 @@
+{#<!DOCTYPE html>#}
+{#<html>#}
+{#<head>#}
+{#    <meta charset = "UTF-8">#}
+{#    <script src="https://unpkg.com/frappe-charts@latest"></script>#}
+{#</head>#}
+{#<body>#}
+{#<!--HTML-->#}
+{#<div id="chart"></div>#}
+{#<script>#}
+{#    var datelist = new Array(0);#}
+{#    {% for d in date %}#}
+{#        datelist.push("{{ d }}");#}
+{#    {% endfor %}#}
+{#    const data = {#}
+{##}
+{#        labels:datelist,#}
+{#        datasets: [#}
+{#            {#}
+{#                name: "人数", type: "bar",#}
+{#                values: {{ num }}#}
+{##}
+{#            },#}
+{#        ]#}
+{#    }#}
+{##}
+{#    const chart = new frappe.Chart("#chart", {  // or a DOM element,#}
+{#                                                // new Chart() in case of ES6 module with above usage#}
+{#        title: "{{ name }}人流统计图",#}
+{#        data: data,#}
+{#        lineOptions: {#}
+{#        regionFill: 1 // default: 0#}
+{#        },#}
+{#        type: 'axis-mixed', // or 'bar', 'line', 'scatter', 'pie', 'percentage'#}
+{#        height: 900,#}
+{#        colors: ['#7cd6fd', '#743ee2']#}
+{#    })#}
+{#</script>#}
+{##}
+{#</body>#}
+{#</html>#}
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8"/>
+    <meta name = "viewport"
+          content = "width=device-width, initial-scale=1.0"/>
+    <link rel = "stylesheet"
+          href = "../../static/manager.css"/>
+    <link
+            rel = "stylesheet"
+            href = "https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+            integrity = "sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+            crossorigin = "anonymous"
+    />
+    <!-- font text -->
+    <link
+            href = "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"
+            rel = "stylesheet"
+    />
+    <script src="https://unpkg.com/frappe-charts@latest"></script>
+    <title>Ecoast</title>
+</head>
+<body>
+    <header class = "header">
+        <div class = "container header__inner">
+            <div class = "header__icon">
+                <a href = ""><i class = "far fa-user"></i></a>
+                <a href = "/login"><i class = "far fa-sign-out"></i> </a>
+            </div>
+        </div>
+    </header>
+    <section class = "trending">
+        <div class = "container trending__inner">
+            <div class = "trending-products">
+                <h1 class = "trending-products__title">每日人流量  Visitor Flowrate</h1>
+                <div class = "trending-products__separator">
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div id="chart" style="width: 1320px;"></div>
+                <script>
+                        var datelist = new Array(0);
+                        {% for d in date %}
+                            datelist.push("{{ d }}");
+                        {% endfor %}
+                        const data = {
+                            labels:datelist,
+                            datasets: [
+                                {
+                                    name: "人数", type: "bar",
+                                    values: {{ num }}
+                                },
+                            ]
+                    };
+                    const chart = new frappe.Chart("#chart", {  // or a DOM element,
+                        // new Chart() in case of ES6 module with above usage
+                        title: "Chillstep’s Chart",
+                        data: data,
+                        lineOptions: {
+                            regionFill: 1 // default: 0
+                        },
+                        type: 'axis-mixed', // or 'bar', 'line', 'scatter', 'pie', 'percentage'
+                        height: 600,
+                        colors: ['#7cd6fd', '#743ee2']
+                    })
+                </script>
+            </div>
+        </div>
+    </section>
+    <a class = "move-top__btn"
+       href = "#"><i class = "fas fa-arrow-up"></i>
+    </a>
+<div class="fixed">
+        <a href="/managerpage" target="_self" class="after"><div class="icon"></div></a>
+    </div>
+</body>
+</html>

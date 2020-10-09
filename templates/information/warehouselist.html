@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../static/style.css" />
+    <link
+            rel="stylesheet"
+            href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+            integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+            crossorigin="anonymous"
+    />
+    <!-- font text -->
+    <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"
+            rel="stylesheet"
+    />
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="../../static/warehouselist.css">
+    <script>
+        function displayWindow1() {
+            document.getElementById("window1").style.display = "block";
+            document.getElementById("shadow").style.display = "block";
+        }
+        function hideWindow1() {
+            document.getElementById("window1").style.display = "none";
+            document.getElementById("shadow").style.display = "none";
+        }
+        function displayWindow2() {
+            document.getElementById("window2").style.display = "block";
+            document.getElementById("shadow").style.display = "block";
+        }
+        function hideWindow2() {
+            document.getElementById("window2").style.display = "none";
+            document.getElementById("shadow").style.display = "none";
+        }
+    </script>
+    <title>Ecoast</title>
+</head>
+<body>
+<header class="header">
+    <div class="container header__inner">
+        <ul class="navbar">
+            <li class="navbar__item"><a href="/mainpage/eleapp" target="_self">电器</a></li>
+            <li class="navbar__item"><a href="/mainpage/digital" target="_self">数码</a></li>
+            <li class="navbar__item"><a href="/mainpage/book" target="_self">图书</a></li>
+            <li class="navbar__item"><a href="/mainpage/food" target="_self">食品</a></li>
+            <li class="navbar__item">
+                <a href="/mainpage/warehouse">仓库租赁</a>
+                <ul class="dropdown">
+                    <li class="dropdown__item"><a href="#">My Cart</a></li>
+                    <li class="dropdown__item"><a href="#">Check Out</a></li>
+                    <li class="dropdown__item"><a href="#">Order History</a></li>
+                    <li class="dropdown__item"><a href="#">Shop With Sidebar</a></li>
+                    <li class="dropdown__item"><a href="#">Tracking</a></li>
+                    <li class="dropdown__item"><a href="#">Product detail</a></li>
+                </ul>
+            </li>
+            <li class="navbar__item">
+                <a href="/mainpage/changeorder">修改订单</a>
+                <ul class="dropdown">
+                    <li class="dropdown__item"><a href="#">查看订单</a></li>
+                    <li class="dropdown__item"><a href="#">other 1</a></li>
+                    <li class="dropdown__item"><a href="#">other 2</a></li>
+                </ul>
+            </li>
+            <li class="navbar__item"><a href="#">联系我们</a></li>
+        </ul>
+        <div class="header__icon">
+            <a href="/mainpage/profile"><i class="far fa-user"></i></a>
+            <a href="/login"><i class="far fa-shopping-bag"></i> </a>
+        </div>
+    </div>
+</header>
+
+<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+<div class="float1">
+    <ul >
+        <li onmousemove="selectPage(1)"> </li>
+        <li onmousemove="selectPage(2)"> </li>
+        <li onmousemove="selectPage(3)"> </li>
+
+    </ul>
+</div>
+
+<section class="intro">
+
+    <div id="wrap">
+    <div id="main">
+
+        <ul id="pageUl"  class="circle">
+            <li id="pageUlLi1" class="pageUlLi" style="color: red;">&nbsp;</li>
+            <li id="pageUlLi2" class="pageUlLi">&nbsp;</li>
+            <li id="pageUlLi3" class="pageUlLi">&nbsp;</li>
+
+        </ul>
+
+        <div  id="page1" class="page">
+            <div class="navi">
+                <div class="species">
+                    待租仓库
+                </div>
+            </div>
+            <ul class="warehouse_info_ul">
+            {% for empty in emptys %}
+                <li class = "warehouse_info">
+                    <div class="image">
+                        <a href="/mainpage/warehouse/{{ empty.hname }}"><img src="../../media/{{empty.hphoto}}"></a>
+                    </div>
+                    <ul class="info">
+                        <li class="info_num">
+                            {{ empty.hname }}
+                        </li>
+                        <li class="info_acreage">
+                            {{ empty.harea }}平方米
+                        </li>
+                        <li class="info_status">
+                            待租
+                        </li>
+                        <li class="info_price">
+                            ￥{{ empty.hprice }}/ m<sup>2</sup>每月
+                        </li>
+                    </ul>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+
+        <div  id="page2" class="page">
+            <div class="navi">
+                <a href="/mainpage" target="_self" class="after"><div class="icon"></div></a>
+                <div class="species">
+                    货物存储
+                </div>
+            </div>
+           <ul class="warehouse_info_ul">
+                {% for storage in storages %}
+                    <li class = "warehouse_info">
+                        <div class="image">
+                            <a href="/mainpage/warehouse/{{ storage.hname }}"><img src="../../media/{{storage.hphoto}}"></a>
+                        </div>
+                        <ul class="info">
+                            <li class="info_num">
+                                {{ storage.hname }}
+                            </li>
+                            <li class="info_acreage">
+                                {{ storage.harea }}平方米
+                            </li>
+                            <li class="info_status">
+                                已租
+                            </li>
+                            <li class="info_price">
+                                ￥{{ storage.hprice }}/ m<sup>2</sup>每月
+                            </li>
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div  id="page3" class="page">
+            <div class="navi">
+                <a href="/mainpage" target="_self" class="after"><div class="icon"></div></a>
+                <div class="species">
+                    娱乐场所
+                </div>
+            </div>
+            <ul class="warehouse_info_ul">
+                {% for entertainment in entertainments %}
+                    <li class = "warehouse_info">
+                        <div class="image">
+                            <a href="/mainpage/warehouse/{{ entertainment.hname }}"><img src="../../media/{{entertainment.hphoto}}"></a>
+                        </div>
+                        <ul class="info">
+                            <li class="info_num">
+                                {{ entertainment.hname }}
+                            </li>
+                            <li class="info_acreage">
+                                {{ entertainment.harea }}平方米
+                            </li>
+                            <li class="info_status">
+                                已租
+                            </li>
+                            <li class="info_price">
+                                ￥{{ entertainment.hprice }}/ m<sup>2</sup>每月
+                            </li>
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+
+    </div>
+</div>
+
+    <script type="text/javascript"  >
+    window.onload = resizeImages;
+    window.onresize = resizeImages;
+
+    function resizeImages() {
+        $(function (e) {
+            var screenWeight = document.documentElement.clientWidth;
+            var screenHeight = document.documentElement.clientHeight;
+            $("[name=pageImg]").css("width", screenWeight).css("height", screenHeight);
+            $("#pageUl").css("bottom", screenHeight >> 1);
+        });
+    }
+
+    var index = 1;
+    var curIndex = 1;
+    var wrap = document.getElementById("wrap");
+    var main = document.getElementById("main");
+    var hei = document.body.clientHeight;
+    wrap.style.height = hei + "px";
+    var obj = document.getElementsByTagName("div");
+    for (var i = 0; i < obj.length; i++) {
+        if (obj[i].className == 'page') {
+            obj[i].style.height = hei + "px";
+        }
+    }
+    var pageNum = document.querySelectorAll(".page").length;
+    //如果不加时间控制，滚动会过度灵敏，一次翻好几屏
+    var startTime = 0, //翻屏起始时间
+        endTime = 0,
+        now = 0;
+    //浏览器兼容
+    if ((navigator.userAgent.toLowerCase().indexOf("firefox") != -1)) {
+        document.addEventListener("DOMMouseScroll", scrollFun, false);
+    } else if (document.addEventListener) {
+        document.addEventListener("mousewheel", scrollFun, false);
+    } else if (document.attachEvent) {
+        document.attachEvent("onmousewheel", scrollFun);
+    } else {
+        document.onmousewheel = scrollFun;
+    }
+
+        function selectPage(temp){
+        index=temp;
+        toPage(index);
+    }
+
+    //滚动事件处理函数
+    function scrollFun(event) {
+        startTime = new Date().getTime();
+        var delta = event.detail || (-event.wheelDelta);
+        //mousewheel事件中的 “event.wheelDelta” 属性值：返回的如果是正值说明滚轮是向上滚动
+        //DOMMouseScroll事件中的 “event.detail” 属性值：返回的如果是负值说明滚轮是向上滚动
+        if ((endTime - startTime) < -1000) {
+            if (delta > 0 && parseInt(main.offsetTop) > -(hei * (pageNum - 1))) {
+                //向下滚动
+                index++;
+                toPage(index);
+            }
+            if (delta < 0 && parseInt(main.offsetTop) < 0) {
+                //向上滚动
+                index--;
+                toPage(index);
+            }
+            endTime = new Date().getTime();
+        } else {
+            event.preventDefault();
+        }
+    }
+
+
+    function toPage(idx) {
+        //jquery实现动画效果
+        if(idx!=curIndex){
+            index=idx
+            var delta=idx - curIndex;
+            now = now - delta * hei;
+            $("#main").animate({
+                top: (now + 'px')
+            }, 500);
+            curIndex = idx;
+            //更改列表的选中项
+            $(".pageUlLi").css("color", "black");
+            $("#pageUlLi" + idx).css("color", "red");
+
+        }
+    }
+
+    // //鼠标悬停翻页
+    // document.getElementById("pageUlLi1").onmouseover = function () {
+    //     toPage(1);
+    // }
+    // document.getElementById("pageUlLi2").onmouseover = function () {
+    //     toPage(2);
+    // }
+    // document.getElementById("pageUlLi3").onmouseover = function () {
+    //     toPage(3);
+    // }
+    // document.getElementById("pageUlLi4").onmouseover = function () {
+    //     toPage(4);
+    // }
+    // document.getElementById("pageUlLi5").onmouseover = function () {
+    //     toPage(5);
+    // }
+    //鼠标点击翻页
+    document.getElementById("pageUlLi1").onclick = function () {
+        toPage(1);
+    }
+    document.getElementById("pageUlLi2").onclick = function () {
+        toPage(2);
+    }
+    document.getElementById("pageUlLi3").onclick = function () {
+        toPage(3);
+    }
+
+</script>
+
+</section>
+
+<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+
+<a class="move-top__btn" href="#"><i class="fas fa-arrow-up"></i></a>
+
+
+    <div class="fixed">
+        <a href="/mainpage" target="_self" class="after"><div class="icon"></div></a>
+    </div>
+</body>
+</html>

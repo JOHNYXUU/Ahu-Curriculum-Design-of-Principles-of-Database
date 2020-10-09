@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../static/style.css" />
+    <link
+            rel="stylesheet"
+            href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+            integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+            crossorigin="anonymous"
+    />
+    <!-- font text -->
+    <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"
+            rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../../static/warehouse.css">
+    <script>
+        function displayWindow1() {
+            document.getElementById("window1").style.display = "block";
+            document.getElementById("shadow").style.display = "block";
+        }
+        function hideWindow1() {
+            document.getElementById("window1").style.display = "none";
+            document.getElementById("shadow").style.display = "none";
+        }
+    </script>
+    <title>Ecoast</title>
+</head>
+<body>
+<header class="header">
+    <div class="container header__inner">
+        <ul class="navbar">
+            <li class="navbar__item"><a href="/mainpage/eleapp" target="_self">电器</a></li>
+            <li class="navbar__item"><a href="/mainpage/digital" target="_self">数码</a></li>
+            <li class="navbar__item"><a href="/mainpage/book" target="_self">图书</a></li>
+            <li class="navbar__item"><a href="/mainpage/food" target="_self">食品</a></li>
+            <li class="navbar__item">
+                <a href="/mainpage/warehouse">仓库租赁</a>
+                <ul class="dropdown">
+                    <li class="dropdown__item"><a href="#">My Cart</a></li>
+                    <li class="dropdown__item"><a href="#">Check Out</a></li>
+                    <li class="dropdown__item"><a href="#">Order History</a></li>
+                    <li class="dropdown__item"><a href="#">Shop With Sidebar</a></li>
+                    <li class="dropdown__item"><a href="#">Tracking</a></li>
+                    <li class="dropdown__item"><a href="#">Product detail</a></li>
+                </ul>
+            </li>
+            <li class="navbar__item">
+                <a href="/mainpage/changeorder">修改订单</a>
+                <ul class="dropdown">
+                    <li class="dropdown__item"><a href="#">查看订单</a></li>
+                    <li class="dropdown__item"><a href="#">other 1</a></li>
+                    <li class="dropdown__item"><a href="#">other 2</a></li>
+                </ul>
+            </li>
+            <li class="navbar__item"><a href="#">联系我们</a></li>
+        </ul>
+        <div class="header__icon">
+            <a href="/mainpage/profile"><i class="far fa-user"></i></a>
+            <a href="/login"><i class="far fa-shopping-bag"></i> </a>
+        </div>
+    </div>
+</header>
+
+<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+<section class="intro">
+     <div class="warehouse_box">
+        <div class="image">
+            <img src="../../media/{{warehouse.hphoto}}">
+        </div>
+        <ul class="info">
+            <li class="num">
+                NO.{{ warehouse.pk }}
+            </li>
+            <li class="acreage">
+                {{ warehouse.harea }} m<sup>2</sup>
+            </li>
+            <li class="address">
+                {{ warehouse.hlocation }}
+            </li>
+            <li class="price">
+                ￥{{ warehouse.hprice }} /m<sup>2</sup>每月
+            </li>
+            <li class="status">
+                待租
+            </li>
+        </ul>
+        <div class="lease">
+            <a href="javascript:void(0)" onclick="displayWindow1()">
+                <input type="button" value="租赁">
+            </a>
+        </div>
+    </div>
+    <div id="window1" class="window1">
+        <div class="main">
+            <form method="post">
+                {% csrf_token %}
+                <div class="time">
+                    <div class="text1">
+                        租赁时长:
+                    </div>
+                    <input type = "number" name="amount" >
+                    <div class="text2">
+                        月
+                    </div>
+                </div>
+                <div class="category">
+                    租赁用途:
+                    <input type="radio" name="category"  value="货物存储" id="storage"/><label for="storage">&nbsp货物存储</label>&nbsp&nbsp
+                    <input type="radio" name="category" value="娱乐场所" id="entertainment"/><label for="entertainment">&nbsp娱乐场所</label>
+                </div>
+                <div class="detail">
+                    <div class="text">
+                        详细用途：
+                    </div>
+                    <input type = "text" name="detail">
+                </div>
+                <a href="javascript:void(0)" onclick="displayWindow2(),hideWindow1()">
+                    <input type="submit" value="确认租赁" class="button">
+                </a>
+            </form>
+        </div>
+        <a href="javascript:void(0)" onclick="hideWindow1()">
+            <img src="../../static/images/关闭.png" height="25px" width="25px">
+        </a>
+    </div>
+    <div id="shadow" class="shadow"></div>
+</section>
+
+<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+
+<section class="trending">
+    <div class="container trending__inner">
+        <div class="trending__list">
+            <div class="shipping-box">
+                <div class="shipping-box__overlay">
+                    <i class="far fa-truck"></i>
+                    <h1 class="shipping-box__title">包邮</h1>
+                    <p class="shipping-box__text">总额 大于 ￥88</p>
+                </div>
+            </div>
+            <div class="shipping-box">
+                <div class="shipping-box__overlay">
+                    <i class="far fa-warehouse"></i>
+                    <h1 class="shipping-box__title">七天无理由退货</h1>
+                    <p class="shipping-box__text">购买安心</p>
+                </div>
+            </div>
+            <div class="shipping-box">
+                <div class="shipping-box__overlay">
+                    <i class="far fa-user"></i>
+                    <h1 class="shipping-box__title">一对一客服</h1>
+                    <p class="shipping-box__text">保障服务</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<section class="logo-brand">
+    <div class="div container logo-brand__inner">
+        <ul class="logo-brand__list">
+            <li class="logo-brand__item">
+                <img
+                        src="https://weblizar.com/demo/html/Ecoast/images/client-4.png"
+                        alt="a"
+                />
+            </li>
+            <li class="logo-brand__item">
+                <img
+                        src="https://weblizar.com/demo/html/Ecoast/images/client-1.png"
+                        alt="b"
+                />
+            </li>
+            <li class="logo-brand__item">
+                <img
+                        src="https://weblizar.com/demo/html/Ecoast/images/client-2.png"
+                        alt="c"
+                />
+            </li>
+            <li class="logo-brand__item">
+                <img
+                        src="https://weblizar.com/demo/html/Ecoast/images/client-3.png"
+                        alt="d"
+                />
+            </li>
+            <li class="logo-brand__item">
+                <img
+                        src="https://weblizar.com/demo/html/Ecoast/images/client-4.png"
+                        alt="a"
+                />
+            </li>
+            <li class="logo-brand__item">
+                <img
+                        src="https://weblizar.com/demo/html/Ecoast/images/client-1.png"
+                        alt="b"
+                />
+            </li>
+            <li class="logo-brand__item">
+                <img
+                        src="https://weblizar.com/demo/html/Ecoast/images/client-2.png"
+                        alt="c"
+                />
+            </li>
+            <li class="logo-brand__item">
+                <img
+                        src="https://weblizar.com/demo/html/Ecoast/images/client-3.png"
+                        alt="d"
+                />
+            </li>
+        </ul>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer__overlay">
+        <div class="container footer__inner">
+            <ul class="footer__list">
+                <li class="footer__item">
+              <span class="footer__logo">
+                <img
+                        src="https://weblizar.com/demo/html/Ecoast/images/logo-wht.png"
+                        alt="logo"
+                />
+              </span>
+                    <p class="footer__para">
+                        Created by <br><br>安徽大学计算机科学与技术学院 <br><br>软件工程学生:<br><br>王浩宇 <br><br>徐雪健<br> <br>李义刚 <br><br>朱龙生
+                    </p>
+                </li>
+                <li class="footer__item">
+                    <h2 class="footer__title">Populer Tags</h2>
+                    <ul class="link-list">
+                        <li class="link-list__item"><a href="#">数码</a></li>
+                        <li class="link-list__item"><a href="#">家电</a></li>
+                        <li class="link-list__item"><a href="#">图书</a></li>
+                        <li class="link-list__item"><a href="#">食品</a></li>
+                    </ul>
+                </li>
+                <li class="footer__item">
+                    <h2 class="footer__title">Contact-Us</h2>
+                    <ul class="contact-list">
+                        <li class="contact-list__item">
+                            安徽大学磬苑校区行知楼B205 ACM-ICPC实验室
+                        </li>
+                        <li class="contact-list__item">(+86) 15755111689</li>
+                        <li class="contact-list__item">howiewang.cs@ahu.com</li>
+                    </ul>
+                </li>
+                <li class="footer__item">
+                    <h2 class="footer__title">Rss</h2>
+                    <div class="contact-box">
+                        <p class="contact-box__title">订阅最新消息</p>
+                        <input
+                                class="contact-box__input"
+                                type="text"
+                                placeholder="Email"
+                        />
+                        <button class="contact-box__btn">确定订阅</button>
+                    </div>
+                </li>
+            </ul>
+            <p class="footer__last-text">
+                2020 . All Rights Reserved Developed By 安徽大学软件工程.
+            </p>
+        </div>
+    </div>
+</footer>
+<a class="move-top__btn" href="#"><i class="fas fa-arrow-up"></i></a>
+<div class="fixed">
+        <a href="/mainpage" target="_self" class="after"><div class="icon"></div></a>
+    </div>
+</body>
+</html>

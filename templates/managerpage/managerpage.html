@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8"/>
+    <meta name = "viewport"
+          content = "width=device-width, initial-scale=1.0"/>
+    <link rel = "stylesheet"
+          href = "../../static/manager.css"/>
+    <link
+            rel = "stylesheet"
+            href = "https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+            integrity = "sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+            crossorigin = "anonymous"
+    />
+    <!-- font text -->
+    <link
+            href = "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"
+            rel = "stylesheet"
+    />
+    <script src="https://unpkg.com/frappe-charts@latest"></script>
+    <script>
+        function displayWindow() {
+            document.getElementById("window").style.display = "block";
+            document.getElementById("shadow").style.display = "block";
+        }
+        function hideWindow() {
+            document.getElementById("window").style.display = "none";
+            document.getElementById("shadow").style.display = "none";
+        }
+    </script>
+    <title>Ecoast</title>
+</head>
+<body>
+    <header class = "header">
+        <div class = "container header__inner">
+            <ul class = "navbar">
+                <li class = "navbar__item"><a href = "#">仓库监控</a></li>
+            </ul>
+            <div class = "header__icon">
+                <a href = ""><i class = "far fa-user"></i></a>
+                <a href = "/login"><i class = "far fa-sign-out"></i> </a>
+            </div>
+        </div>
+    </header>
+    <section class = "trending">
+        <div class = "container trending__inner">
+            <div class = "trending__list">
+                <div class = "shipping-box">
+                    <!--正常跳转-->
+                    {% if request.COOKIES.isentertainment == '1' %}
+                        <a href="/managerpage/visitorflow" target="_self">
+                            <div class = "shipping-box__overlay">
+                            <i class = "far fa-users"></i>
+                            <h1 class = "shipping-box__title">日人流量</h1>
+                            </div>
+                        </a>
+                    {% else %}
+                        <a href="javascript:void(0)" onclick="displayWindow()">
+                            <div class = "shipping-box__overlay">
+                            <i class = "far fa-users"></i>
+                            <h1 class = "shipping-box__title">日人流量</h1>
+                            </div>
+                        </a>
+                    {% endif %}
+                </div>
+{#            {% if request.COOKIES.isentertainment == '0' %}#}
+                <div class = "shipping-box">
+                    {% if request.COOKIES.isentertainment == '0' %}
+                        <a href="/managerpage/inoutput" >
+                                <div class = "shipping-box__overlay">
+                                <i class = "far fa-person-dolly"></i>
+                                <h1 class = "shipping-box__title">进出货物</h1>
+                                </div>
+                        </a>
+                    {% else %}
+                        <a href="javascript:void(0)" onclick="displayWindow()">
+                            <div class = "shipping-box__overlay">
+                            <i class = "far fa-person-dolly"></i>
+                            <h1 class = "shipping-box__title">进出货物</h1>
+                            </div>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class = "trending__list">
+                <div class = "shipping-box">
+                    {% if request.COOKIES.isentertainment == '0' %}
+                        <a href="/managerpage/warestatic" target="_self">
+                            <div class = "shipping-box__overlay">
+                                <i class = "far fa-chart-bar"></i>
+                                <h1 class = "shipping-box__title">货物统计</h1>
+                            </div>
+                        </a>
+                    {% else %}
+                        <a href="javascript:void(0)" onclick="displayWindow()">
+                            <div class = "shipping-box__overlay">
+                            <i class = "far fa-chart-bar"></i>
+                            <h1 class = "shipping-box__title">货物统计</h1>
+                            </div>
+                        </a>
+                    {% endif %}
+                </div>
+                <div class = "shipping-box">
+                    {% if request.COOKIES.isentertainment == '0' %}
+                        <a href="/managerpage/salestatic" target="_self">
+                            <div class = "shipping-box__overlay">
+                                <i class = "far fa-chart-pie-alt"></i>
+                                <h1 class = "shipping-box__title">销量统计</h1>
+                            </div>
+                        </a>
+                    {% else %}
+                        <a href="javascript:void(0)" onclick="displayWindow()">
+                            <div class = "shipping-box__overlay">
+                            <i class = "far fa-chart-pie-alt"></i>
+                            <h1 class = "shipping-box__title">销量统计</h1>
+                            </div>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="footer__overlay">
+            <div class="container footer__inner">
+                <ul class="footer__list">
+                    <li class="footer__item">
+              <span class="footer__logo">
+                <img
+                        src="https://weblizar.com/demo/html/Ecoast/images/logo-wht.png"
+                        alt="logo"
+                />
+              </span>
+                        <p class="footer__para">
+                            Created by <br><br>安徽大学计算机科学与技术学院 <br><br>软件工程学生:<br><br>王浩宇 <br><br>徐雪健<br> <br>李义刚 <br><br>朱龙生
+                        </p>
+                    </li>
+                    <li class="footer__item">
+                        <h2 class="footer__title">Populer Tags</h2>
+                        <ul class="link-list">
+                            <li class="link-list__item"><a href="#">数码</a></li>
+                            <li class="link-list__item"><a href="#">家电</a></li>
+                            <li class="link-list__item"><a href="#">图书</a></li>
+                            <li class="link-list__item"><a href="#">食品</a></li>
+                        </ul>
+                    </li>
+                    <li class="footer__item">
+                        <h2 class="footer__title">Contact-Us</h2>
+                        <ul class="contact-list">
+                            <li class="contact-list__item">
+                                安徽大学磬苑校区行知楼B205 ACM-ICPC实验室
+                            </li>
+                            <li class="contact-list__item">(+86) 15755111689</li>
+                            <li class="contact-list__item">howiewang.cs@ahu.com</li>
+                        </ul>
+                    </li>
+                    <li class="footer__item">
+                        <h2 class="footer__title">Rss</h2>
+                        <div class="contact-box">
+                            <p class="contact-box__title">订阅最新消息</p>
+                            <input
+                                    class="contact-box__input"
+                                    type="text"
+                                    placeholder="Email"
+                            />
+                            <button class="contact-box__btn">确定订阅</button>
+                        </div>
+                    </li>
+                </ul>
+                <p class="footer__last-text">
+                    2020 . All Rights Reserved Developed By 安徽大学软件工程.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <a class = "move-top__btn" href = "#"><i class = "fas fa-arrow-up"></i></a>
+
+    <div class="window" id="window">
+        <div class="text">
+            抱歉，您的仓库不支持此功能
+        </div>
+        <a href="javascript:void(0)" onclick="hideWindow()">
+            <img src="../../static/images/关闭.png" height="25px" width="25px">
+        </a>
+    </div>
+    <div id="shadow" class="shadow"></div>
+</body>
+</html>

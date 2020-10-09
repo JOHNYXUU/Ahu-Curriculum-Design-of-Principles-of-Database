@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang = "zh-CN">
+<head>
+    <meta charset = "UTF-8"/>
+    <meta name = "viewport"
+          content = "width=device-width, initial-scale=1.0"/>
+        <link rel = "stylesheet" href = "../../static/manager.css"/>
+    <link
+            rel = "stylesheet"
+            href = "https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+            integrity = "sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+            crossorigin = "anonymous"
+    />
+    <!-- font text -->
+    <link
+            href = "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"
+            rel = "stylesheet"
+    />
+    <script src="https://unpkg.com/frappe-charts@latest"></script>
+    <script>
+        function displayWindow2() {
+            document.getElementById("window2").style.display = "block";
+            document.getElementById("shadow").style.display = "block";
+        }
+        function hideWindow2() {
+            document.getElementById("window2").style.display = "none";
+            document.getElementById("shadow").style.display = "none";
+        }
+    </script>
+    <title>WareMouse</title>
+</head>
+<body>
+    <header class = "header">
+        <div class = "container header__inner">
+            <div class = "header__icon">
+                <a href = ""><i class = "far fa-user"></i></a>
+                <a href = "/login"><i class = "far fa-sign-out"></i> </a>
+            </div>
+        </div>
+    </header>
+    <section class = "trending">
+        <div class = "container trending__inner">
+            <div class = "trending-products">
+                <h1 class = "trending-products__title">货物统计 Storage Static</h1>
+                <div class = "trending-products__separator">
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div id="chart" style="width: 1320px;"></div>
+                <script>
+                    var namelist = new Array(0);
+                        var cnr = 1;
+                        {% for n in names %}
+                            namelist.push("{{ n }}");
+                        {% endfor %}
+                    const data = {
+                        labels: namelist,
+                        datasets: [
+                            {
+                                name: "库存", type: "line",
+                                values: {{ num }}
+
+                            }
+                        ]
+                    };
+                    const chart = new frappe.Chart("#chart", {  // or a DOM element,
+                        // new Chart() in case of ES6 module with above usage
+                        title: "货物统计",
+                        data: data,
+                        lineOptions: {
+                            regionFill: 1 // default: 0
+                        },
+                        type: 'bar', // or 'bar', 'line', 'scatter', 'pie', 'percentage'
+                        height: 600,
+                        colors: ['#7cd6fd', '#743ee2']
+                    })
+                </script>
+            </div>
+        </div>
+    </section>
+    <form method="post">
+        {% csrf_token %}
+        <ul class="main">
+            <li class="name">
+                <div class="left">
+                    选择货物
+                </div>
+                <div class="right">
+                    <select name="selected">
+                        {% for name in names %}
+                            <option>--{{ name }}--</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </li>
+            <li class="operate">
+                <div class="left">
+                    选择操作
+                </div>
+                <div class="right">
+                    <input type="radio" name="operate" value="in" id="in"><label for="in">进货</label>
+                    <input type="radio" name="operate" value="out" id="out"><label for="out">出货</label>
+                </div>
+            </li>
+            <li class="num">
+                <div class="left">
+                    输入数量
+                </div>
+                <div class="right">
+                    <input type="number" name='number'>
+                </div>
+            </li>
+            <li class="button">
+                <a href="javascript:void (0)" onclick="displayWindow2()"><input type = "submit" value="确认"></a>
+            </li>
+        </ul>
+    </form>
+    <div class="window2" id="window2">
+        <div class="text">
+            成功！
+        </div>
+        <a href="javascript:void(0)" onclick="hideWindow2()">
+            <img src="../../static/images/关闭.png" height="25px" width="25px">
+        </a>
+    </div>
+<div class="fixed">
+        <a href="/managerpage" target="_self" class="after"><div class="icon"></div></a>
+    </div>
+</body>
+</html>
